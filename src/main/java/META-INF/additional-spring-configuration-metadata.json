@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "logging.level.org.springframework.cloud.kubernetes",
+    "type": "java.lang.String",
+    "description": "A description for 'logging.level.org.springframework.cloud.kubernetes'"
+  },
+  {
+    "name": "pagos.api.url",
+    "type": "java.lang.String",
+    "description": "A description for 'pagos.api.url'"
+  },
+  {
+    "name": "convenios.api.url",
+    "type": "java.lang.String",
+    "description": "A description for 'convenios.api.url'"
+  },
+  {
+    "name": "spring.cloud.kubernetes.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.cloud.kubernetes.enabled'"
+  }
+]}
