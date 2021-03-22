@@ -1,7 +1,5 @@
 package com.appgate.prueba.dto;
 
-import org.springframework.data.annotation.Id;
-
 import lombok.Data;
 import lombok.ToString;
 import lombok.experimental.Accessors;
@@ -11,7 +9,6 @@ import lombok.experimental.Accessors;
 @ToString
 public class UserDto {
 
-	@Id
 	private String id;
 
 	private String document;
