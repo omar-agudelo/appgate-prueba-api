@@ -12,35 +12,18 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.appgate.prueba.config.ResponseObject;
 import com.appgate.prueba.config.ResponseObjectBuilder;
-<<<<<<< HEAD
 import com.appgate.prueba.service.UploadFileService;
-=======
-import com.appgate.prueba.dto.RouletteDto;
-import com.appgate.prueba.dto.StatusRouletteDto;
-import com.appgate.prueba.dto.ToBetDto;
-import com.appgate.prueba.dto.WinnerUsersDto;
-import com.appgate.prueba.dto.WinnersDto;
-import com.appgate.prueba.model.Bet;
-import com.appgate.prueba.model.Roulette;
-import com.appgate.prueba.repository.BetRepository;
-import com.appgate.prueba.repository.RouletteRepository;
-import com.appgate.prueba.service.UploadFileService;
-import com.appgate.prueba.util.ConstantsRoulette;
->>>>>>> da127255621761b2c0fa00457bd8d3bc49da6f54
 import com.appgate.prueba.util.RouletteCodes;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service(value = "rouletteService")
-public class RouletteServiceImpl implements UploadFileService {
-
-	
+public class UploadFileServiceImpl implements UploadFileService {
 
 	@Autowired
 	private MessageSource messageSource;
 
-<<<<<<< HEAD
 	@Override
 	public ResponseObject uploadFile(MultipartFile file) {
 		ResponseObjectBuilder responseBuilder = new ResponseObjectBuilder(messageSource);
@@ -79,19 +62,6 @@ public class RouletteServiceImpl implements UploadFileService {
 
 		}
 		return responseBuilder.build();
-=======
-	
-	
-	
 
-	@Override
-	public ResponseObject uploadFile(MultipartFile file) {
-		ResponseObjectBuilder responseBuilder = new ResponseObjectBuilder(messageSource);
-		
-		
-		responseBuilder.setRouletteCode(RouletteCodes.REQUEST_PROCESSED_CORRECTLY);
-		responseBuilder.setDetailedMessage(RouletteCodes.REQUEST_PROCESSED_CORRECTLY.name());
-		return null;
->>>>>>> da127255621761b2c0fa00457bd8d3bc49da6f54
 	}
 }
