@@ -11,14 +11,9 @@ import lombok.experimental.Accessors;
 @ToString
 public class FileDto {
 
-	 private String iPFrom;
-	 private String iPTo;
 	 private String countryCode; 
-	 private String country;
 	 private String region;
 	 private String city;
-	 private String latitude;
-	 private String longitude;
 	 private String timeZone;
 
 }

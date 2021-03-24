@@ -1,84 +1,61 @@
 package com.appgate.prueba.service.imp;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
 import com.appgate.prueba.config.ResponseObject;
-import com.appgate.prueba.dto.UserDto;
-import com.appgate.prueba.service.UserService;
+import com.appgate.prueba.config.ResponseObjectBuilder;
+import com.appgate.prueba.dto.FileDto;
+import com.appgate.prueba.model.File;
+import com.appgate.prueba.repository.FileUploadRepository;
+import com.appgate.prueba.service.IpService;
+import com.appgate.prueba.util.RouletteCodes;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service(value = "userService")
-public class UserServiceImpl implements UserService {
-
-	
+public class UserServiceImpl implements IpService {
 
 	@Autowired
 	private MessageSource messageSource;
+	@Autowired
+	private FileUploadRepository fileUploadRepository;
 
 	@Override
-	public ResponseObject save(UserDto userDto) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResponseObject findByip(String ip) {
+		ResponseObjectBuilder responseBuilder = new ResponseObjectBuilder(messageSource);
+		long result = 0;
+		String[] ipAddressInArray = ip.split("\\.");
+		for (int i = 0; i < ipAddressInArray.length; i++) {
+			int power = 3 - i;
+			result += (Integer.parseInt(ipAddressInArray[i]) % 256 * Math.pow(256, power));
+		}
+		List<File> files = fileUploadRepository.findByIPFromAndIPTo(String.valueOf(result));
+		if (!files.isEmpty()) {
+			responseBuilder.setRouletteCode(RouletteCodes.REQUEST_PROCESSED_CORRECTLY);
+			responseBuilder.setDetailedMessage(RouletteCodes.REQUEST_PROCESSED_CORRECTLY.name());
+			responseBuilder.addPayloadProperty("Respuesta", returnListDto(files));
+		} else {
+			responseBuilder.setRouletteCode(RouletteCodes.REQUEST_NOT_CORRECTLY);
+			responseBuilder.setDetailedMessage(RouletteCodes.REQUEST_NOT_CORRECTLY.name());
+		}
+		return responseBuilder.build();
 	}
 
-	@Override
-	public ResponseObject users() {
-		// TODO Auto-generated method stub
-		return null;
+	private List<FileDto> returnListDto(List<File> files) {
+		List<FileDto> fileDtos = new ArrayList<>();
+		files.stream().filter(f -> fileDtos.add(dto(f))).collect(Collectors.toList());
+		return fileDtos;
 	}
 
-//	@Override
-//	public ResponseObject save(UserDto userDto) {
-//		ResponseObjectBuilder responseBuilder = new ResponseObjectBuilder(messageSource);
-//		try {
-//			if (userDto != null) {
-//				if (Util.isEmpty(userDto.getName())) {
-//					responseBuilder.setDetailedMessage(RouletteCodes.ERROR_VALIDACION_NOMBRES.name());
-//					responseBuilder.setRouletteCode(RouletteCodes.ERROR_VALIDACION_NOMBRES);
-//				} else if (Util.isEmpty(userDto.getDocument())) {
-//					responseBuilder.setDetailedMessage(RouletteCodes.ERROR_NUMERO_DOCUMENTO.name());
-//					responseBuilder.setRouletteCode(RouletteCodes.ERROR_NUMERO_DOCUMENTO);
-//				} else if (userDto.getPhone() == null) {
-//					responseBuilder.setDetailedMessage(RouletteCodes.ERROR_CLIENTE_TELEFONO_NULL.name());
-//					responseBuilder.setRouletteCode(RouletteCodes.ERROR_CLIENTE_TELEFONO_NULL);
-//				} else if (Util.isEmpty(userDto.getEmail())) {
-//					responseBuilder.setDetailedMessage(RouletteCodes.ERROR_CLIENTE_EMAIL_NULL.name());
-//					responseBuilder.setRouletteCode(RouletteCodes.ERROR_CLIENTE_EMAIL_NULL);
-//				} else if (Util.isEmpty(userDto.getCountry())) {
-//					responseBuilder.setDetailedMessage(RouletteCodes.ERROR_ZONA_DESCONOCIDA.name());
-//					responseBuilder.setRouletteCode(RouletteCodes.ERROR_ZONA_DESCONOCIDA);
-//				} else {
-//					if (user == null) {
-//					
-//						responseBuilder.setDetailedMessage(RouletteCodes.REQUEST_PROCESSED_CORRECTLY.name());
-//						responseBuilder.setRouletteCode(RouletteCodes.REQUEST_PROCESSED_CORRECTLY);
-//
-//					}else {
-//						responseBuilder.setDetailedMessage(RouletteCodes.ERROR_USUARIO_EXIST.name());
-//						responseBuilder.setRouletteCode(RouletteCodes.ERROR_USUARIO_EXIST);
-//					}
-//				}
-//			}
-//		} catch (ExecutionError dke) {
-//			responseBuilder.setDetailedMessage(dke.getMessage());
-//			responseBuilder.setRouletteCode(RouletteCodes.ERROR_USUARIO);
-//
-//		}
-//
-//		return responseBuilder.build();
-//	}
-//
-//	
-//
-//	@Override
-//	public ResponseObject users() {
-//		ResponseObjectBuilder responseBuilder = new ResponseObjectBuilder(messageSource);
-//		
-//		return responseBuilder.build();
-//	}
+	private FileDto dto(File f) {
+		return new FileDto(f.getCountryCode(), f.getRegion(), f.getCity(), f.getTimeZone());
+	}
 
 }

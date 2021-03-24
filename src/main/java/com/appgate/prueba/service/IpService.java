@@ -3,10 +3,9 @@ package com.appgate.prueba.service;
 import com.appgate.prueba.config.ResponseObject;
 import com.appgate.prueba.dto.UserDto;
 
-public interface UserService {
+public interface IpService {
 	
-	ResponseObject save(UserDto userDto);
-
-	ResponseObject users();
+	
+	ResponseObject findByip(String ip);
 
 }

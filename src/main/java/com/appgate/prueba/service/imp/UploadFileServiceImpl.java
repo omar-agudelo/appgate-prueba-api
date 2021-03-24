@@ -15,6 +15,7 @@ import com.appgate.prueba.model.File;
 import com.appgate.prueba.repository.FileUploadRepository;
 import com.appgate.prueba.service.UploadFileService;
 import com.appgate.prueba.util.RouletteCodes;
+import com.appgate.prueba.util.Util;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,10 +44,12 @@ public class UploadFileServiceImpl implements UploadFileService {
 				while ((line = fileReader.readLine()) != null) {
 					String[] datos = line.split(cvsSplitBy);
 					log.info(datos[0] + ", " + datos[1] + ", " + datos[2] + ", " + datos[3] + ", " + datos[4] + ", "
-							+ datos[5] + ", " + datos[6] + ", " + datos[7] + ", " + datos[8]);					
-					fileUploadRepository.save(new File().setIPFrom(datos[0]).setIPTo(datos[1]).setCountryCode(datos[2])
-							.setCountry(datos[3]).setRegion(datos[4]).setCity(datos[5]).setLatitude(datos[6])
-							.setLongitude(datos[7]).setTimeZone(datos[8]));
+							+ datos[5] + ", " + datos[6] + ", " + datos[7] + ", " + datos[8]);
+					fileUploadRepository.save(new File().setIPFrom(Util.replaceComillas(datos[0]))
+							.setIPTo(Util.replaceComillas(datos[1])).setCountryCode(Util.replaceComillas(datos[2]))
+							.setCountry(Util.replaceComillas(datos[3])).setRegion(Util.replaceComillas(datos[4]))
+							.setCity(Util.replaceComillas(datos[5])).setLatitude(Util.replaceComillas(datos[6]))
+							.setLongitude(Util.replaceComillas(datos[7])).setTimeZone(Util.replaceComillas(datos[8])));
 
 				}
 				responseBuilder.setRouletteCode(RouletteCodes.REQUEST_PROCESSED_CORRECTLY);

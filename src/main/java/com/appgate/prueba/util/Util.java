@@ -27,4 +27,9 @@ public class Util {
 
 	}
 
+	public static String replaceComillas(String valor) {
+		return !isEmpty(valor) ? valor.replace("\"", "") : null;
+
+	}
+
 }

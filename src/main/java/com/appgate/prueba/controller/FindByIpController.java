@@ -5,35 +5,28 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.appgate.prueba.config.ResponseObject;
-import com.appgate.prueba.dto.UserDto;
-import com.appgate.prueba.service.UserService;
+import com.appgate.prueba.service.IpService;
+import com.appgate.prueba.util.ConstantsRoulette;
 
 @RestController
-@RequestMapping("/v1/user")
+@RequestMapping("/v1/findip")
 @CrossOrigin("*")
-public class UserController {
+public class FindByIpController {
 
 	@Autowired
-	private UserService userService;
+	private IpService ipService;
 
-
-	@PostMapping
-	@ResponseBody
-	public ResponseEntity<ResponseObject> save(@RequestBody UserDto userDto) {
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.save(userDto));
-	}
 
 	@GetMapping
 	@ResponseBody
-	public ResponseEntity<ResponseObject> users() {
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.users());
+	public ResponseEntity<ResponseObject> findByip(@RequestHeader(value = ConstantsRoulette.IP, required = true) String ip) {
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(ipService.findByip(ip));
 	}
 
 
