@@ -22,7 +22,7 @@ public class UploadFileController {
 	private UploadFileService uploadFileService;
 
 	@PostMapping()
-	public ResponseEntity<ResponseObject> pruebaLocal(@RequestPart(value = "file") MultipartFile file) {
+	public ResponseEntity<ResponseObject> pruebaLocal(@RequestPart(value = "file", required = true) MultipartFile file) {
 		return ResponseEntity.status(HttpStatus.OK).body(uploadFileService.uploadFile(file));
 	}
 
