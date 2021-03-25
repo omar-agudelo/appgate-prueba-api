@@ -1,7 +1,7 @@
 # appgate-prueba-api
 
 
-Para la prueba de appgate, maneje un proyecto con sprint boot - maven y base de datos H2 mediante una aquietectura de 3 capas en la cual 
+Para la prueba de appgate, maneje un proyecto con spring boot - maven y base de datos H2 mediante una aquietectura de 3 capas en la cual 
  hace referencia a las siguientes definiciones. 
 
 
@@ -40,7 +40,7 @@ Aqui tendremos clases y funciones que se conectan a la base de datos y es donde 
 Aqui ejecutaremos consultas sql de forma que ninguna de las otras capas saben donde esta la base de datos, 
 asi la capa de presentacion podria estar en un pc y las otras capas en un servidor como servicio se software Saas.
  
-#################################################################
+##################
 --CONSUMO DE SERVICIOS 
 ##################################################################
 para el consumo de los servicios se realizan por medio de postman con los siguientes endpoints.
@@ -57,7 +57,7 @@ Una de las gran vetajas de manejar sprint boot es que maneja su propio servidor 
 En el path raíz de donde se descarga o genera el pull del repositorio, ingresar a la carpeta target que es el build del proyecto y ejecutar
 
 Java –jar appgate-prueba-api por lienas de comandos 
-##############################################################
+###############
 --DUDAS DEL PROYECTO
 #############################################################
 -al iniciar el proyecto no tenia claro el manejo o la funcionalidad al momento de realizar la consulta de una ip con solo IP_from, IP_to
@@ -65,13 +65,13 @@ de esta manera maneje un rango entre esas dos IP´s,
 
 - no me queda muy claro poder especificar como otorgar o que la aplicación valide una ip real como lo dice el documento
 
-#############################################################
+####################
 FALTANTES
 ############################################################
 
 - uno de los faltes fue realizar una prueba unitaria de la carga del archivo csv ya que el tamaño es muy grande 
 
-#######################################################
+#####################
 REPOSITORIO
 ######################################################
 
