@@ -57,4 +57,25 @@ Una de las gran vetajas de manejar sprint boot es que maneja su propio servidor 
 En el path raíz de donde se descarga o genera el pull del repositorio, ingresar a la carpeta target que es el build del proyecto y ejecutar
 
 Java –jar appgate-prueba-api por lienas de comandos 
+##############################################################
+--DUDAS DEL PROYECTO
+#############################################################
+-al iniciar el proyecto no tenia claro el manejo o la funcionalidad al momento de realizar la consulta de una ip con solo IP_from, IP_to
+de esta manera maneje un rango entre esas dos IP´s, 
+
+- no me queda muy claro poder especificar como otorgar o que la aplicación valide una ip real como lo dice el documento
+
+#############################################################
+FALTANTES
+############################################################
+
+- uno de los faltes fue realizar una prueba unitaria de la carga del archivo csv ya que el tamaño es muy grande 
+
+#######################################################
+REPOSITORIO
+######################################################
+
+- El repositorio como lo conocen es git hub y maneje los commits con emojis en cada push, esto nos pude dar a conocer
+  el tipo de commit que se está realizando para una estructuración eficinte en cada comentario e historial de una aplicación empresarial
+  
 
